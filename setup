@@ -1,0 +1,104 @@
+#!/bin/bash
+rvcolor=\033[1;31m
+banner() {
+clear
+echo -e " $rvcolor ____   __     __  _____ ___ ____  _   _ ___ _   _  ____  /n"
+echo -e " $rvcolor|  _ \  \ \   / / |  ___|_ _/ ___|| | | |_ _| \ | |/ ___| /n"
+echo -e " $rvcolor| |_) |  \ \ / /  | |_   | |\___ \| |_| || ||  \| | |  _  /n"
+echo -e " $rvcolor|  _ <    \ V /   |  _|  | | ___) |  _  || || |\  | |_| | /n"
+echo -e " $rvcolor|_| \_\    \_/    |_|   |___|____/|_| |_|___|_| \_|\____| /n"
+echo -e
+echo ""
+echo ""
+echo -e"THIS TOOL BY (REDVIROUS)"
+}
+banner
+echo -e "THE PACKAGE IS install"
+sleep 1
+apt-get update
+apt-get upgrade -y
+apt-get -y install ssh
+pkg install openssh -y
+apt-get -y install curl
+apt-get -y install php
+apt-get -y install unzip
+apt-get -y install openssh-server
+printf "\e[0m\n"
+printf "\e[0m\e[1;91m [\e[1;97m~\e[1;91m]\e[1;93m Setting Up Environment ....\e[0m\n" 
+if [[ -d .rvf ]]; then
+printf ""
+else
+mkdir .rvf
+fi
+if [[ -d logs ]]; then
+printf ""
+else
+mkdir logs
+fi
+if [[ -e Modules.zip ]]; then
+unzip -qq Modules.zip
+rm Modules.zip
+fi
+if [[ -e .rvf/ngrok ]]; then
+printf ""
+else
+arch=$(uname -a | grep -o 'arm' | head -n1)
+arch2=$(uname -a | grep -o 'Android' | head -n1)
+if [[ $arch == *'arm'* ]] || [[ $arch2 == *'Android'* ]] ; then
+curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
+if [[ -e ngrok-stable-linux-arm.zip ]]; then
+unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
+mv ngrok .rvf
+rm -rf ngrok-stable-linux-arm.zip
+chmod +x .rvf/ngrok
+else
+printf "\n \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;93m Error \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;96m Install Ngrok Manually.\e[0m\n"
+exit 1
+fi
+else
+curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
+if [[ -e ngrok-stable-linux-386.zip ]]; then
+unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
+mv ngrok .rvf
+rm -rf ngrok-stable-linux-386.zip
+chmod +x .rvf/ngrok
+else
+printf "\n \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;93m Error \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;96m Install Ngrok Manually.\e[0m\n"
+exit 1
+fi
+fi
+fi
+if [[ -e .rvf/loclx ]]; then
+printf ""
+else
+archa=$(uname -a | grep -o 'arm' | head -n1)
+arch2a=$(uname -a | grep -o 'Android' | head -n1)
+if [[ $archa == *'arm'* ]] || [[ $arch2a == *'Android'* ]] ; then
+curl -LO https://lxpdownloads.sgp1.digitaloceanspaces.com/cli/loclx-linux-arm.zip > /dev/null 2>&1
+if [[ -e loclx-linux-arm.zip ]]; then
+unzip loclx-linux-arm.zip > /dev/null 2>&1
+mv loclx .rvf
+rm -rf loclx-linux-arm.zip
+chmod +x .rvf/loclx
+else
+printf "\n \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;93m Error \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;96m Install LocalXpose Manually.\e[0m\n"
+exit 1
+fi
+else
+curl -LO https://lxpdownloads.sgp1.digitaloceanspaces.com/cli/loclx-linux-386.zip > /dev/null 2>&1 
+if [[ -e loclx-linux-386.zip ]]; then
+unzip loclx-linux-386.zip > /dev/null 2>&1
+mv loclx .rvf
+rm -rf loclx-linux-386.zip
+chmod +x .rvf/loclx
+else
+printf "\n \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;93m Error \e[1;31m[\e[0m\e[1;77m!\e[0m\e[1;31m]\e[0m\e[1;96m Install LocalXpose Manually.\e[0m\n"
+exit 1
+fi
+fi
+fi
+if [[ -d ~/.ssh ]]; then
+printf ""
+else
+mkdir ~/.ssh
+fi
